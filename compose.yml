@@ -148,7 +148,7 @@ services:
 
   readarr:
     container_name: readarr
-    image: lscr.io/linuxserver/readarr:develop
+    image: ghcr.io/faustvii/readarr:latest # community fork; official readarr retired June 2025
     restart: unless-stopped
     network_mode: host
     environment:
