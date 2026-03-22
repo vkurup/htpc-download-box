@@ -146,18 +146,6 @@ services:
       - ${CONFIG_ROOT}/bazarr:/config # config files
       - ${MEDIA_ROOT}:/data
 
-  readarr:
-    container_name: readarr
-    image: ghcr.io/faustvii/readarr:latest # community fork; official readarr retired June 2025
-    restart: unless-stopped
-    network_mode: host
-    user: "${PUID}:${PGID}"
-    environment:
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_ROOT}/readarr:/config
-      - ${MEDIA_ROOT}:/data
-
   calibre-web:
     container_name: calibre-web
     image: lscr.io/linuxserver/calibre-web:latest

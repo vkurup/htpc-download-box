@@ -16,7 +16,6 @@ Forked from [sebgl/htpc-download-box](https://github.com/sebgl/htpc-download-box
 | radarr | 7878 | Movie monitoring and downloads |
 | bazarr | 6767 | Subtitle downloader |
 | jellyfin | 8096 | Media server |
-| readarr | 8787 | Book monitoring and downloads |
 | calibre-web | 8083 | Ebook library UI + OPDS catalog |
 | grampsweb | 5000 | Genealogy app |
 
