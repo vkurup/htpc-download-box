@@ -36,32 +36,16 @@ Suggested tasks:
 
 ---
 
-## WS3: Books
+## WS3: Books ✓ (partially complete)
 
-Add ebook hosting that fits the existing *arr stack pattern.
+**Calibre-Web** is running at `cartman:8083` serving the existing Calibre library from `$MEDIA_ROOT/media/books/library`. OPDS confirmed working at `/opds`.
 
-**Stack:**
-- **Readarr** — auto-downloads books (like Sonarr/Radarr for books), integrates with Prowlarr
-- **Calibre-Web** — library UI with OPDS support (Kindle app, Koreader, Moonreader, etc.) and Send-to-Kindle email
+**Readarr removed** — official project retired June 2025, community fork had SQLite permission issues. Book acquisition is manual for now (upload via Calibre-Web UI).
 
-**Directory layout** (fits existing `MEDIA_ROOT` structure):
-```
-$MEDIA_ROOT/
-  media/
-    books/        ← Calibre library lives here
-  torrents/
-  usenet/
-```
-
-**Delivery methods supported by Calibre-Web:**
-- OPDS catalog (all non-Amazon readers, Kindle app)
-- Browser download
-- Send-to-device via Amazon email (physical Kindles)
-
-**Open questions:**
-- Find existing Calibre library on cartman (`find /mnt -name "metadata.db" 2>/dev/null`)
-- Decide: use existing library path or migrate to `$MEDIA_ROOT/media/books/`
-- Readarr port: 8787
+**Remaining TODOs:**
+- Configure Send-to-Kindle email (`Admin → Email settings` in Calibre-Web)
+- Verify OPDS with a reader app
+- If automated book downloading becomes a priority, evaluate alternatives (e.g. LazyLibrarian)
 
 ---
 
