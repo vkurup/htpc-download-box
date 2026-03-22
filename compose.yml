@@ -146,6 +146,33 @@ services:
       - ${CONFIG_ROOT}/bazarr:/config # config files
       - ${MEDIA_ROOT}:/data
 
+  readarr:
+    container_name: readarr
+    image: linuxserver/readarr:develop
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/readarr:/config
+      - ${MEDIA_ROOT}:/data
+
+  calibre-web:
+    container_name: calibre-web
+    image: linuxserver/calibre-web:latest
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DOCKER_MODS=linuxserver/mods:universal-calibre # enables ebook conversion
+    volumes:
+      - ${CONFIG_ROOT}/calibre-web:/config
+      - ${MEDIA_ROOT}/media/books:/books
+
   # https://www.grampsweb.org/install_setup/deployment/
   grampsweb: &grampsweb
     container_name: grampsweb

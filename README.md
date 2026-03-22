@@ -16,6 +16,8 @@ Forked from [sebgl/htpc-download-box](https://github.com/sebgl/htpc-download-box
 | radarr | 7878 | Movie monitoring and downloads |
 | bazarr | 6767 | Subtitle downloader |
 | jellyfin | 8096 | Media server |
+| readarr | 8787 | Book monitoring and downloads |
+| calibre-web | 8083 | Ebook library UI + OPDS catalog |
 | grampsweb | 5000 | Genealogy app |
 
 ## Setup
@@ -39,3 +41,13 @@ Pushes the latest committed changes to cartman and restarts affected containers.
 ## Environment Variables
 
 See `.env.example` for all required variables.
+
+## Ebook Library
+
+Calibre-Web reads from `$MEDIA_ROOT/media/books/`. If you have an existing Calibre library, locate it first:
+
+```bash
+find /mnt /home -name "metadata.db" 2>/dev/null
+```
+
+Then move it to `$MEDIA_ROOT/media/books/` before starting the `calibre-web` container. On first run, point the setup wizard at `/books/library` (or whichever subdirectory your library is in).
