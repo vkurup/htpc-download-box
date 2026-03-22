@@ -4,20 +4,22 @@ set -euo pipefail
 HOST="cartman"
 REPO_PATH="$HOME/dev/htpc-download-box"
 
-ssh "$HOST" bash <<EOF
+# Pass REPO_PATH as a positional arg so the quoted heredoc has a clear
+# expansion boundary: nothing inside <<'EOF' expands on the local machine.
+ssh "$HOST" bash -s -- "$REPO_PATH" <<'EOF'
 set -euo pipefail
+REPO_PATH="$1"
 cd "$REPO_PATH"
 
-# Warn if working tree is dirty
-if ! git diff --quiet || ! git diff --cached --quiet; then
-  echo "WARNING: working tree on $HOST has uncommitted changes:"
+if [ -n "$(git status --porcelain)" ]; then
+  echo "WARNING: working tree has uncommitted changes:"
   git status --short
   echo ""
 fi
 
-echo "Deploying commit: \$(git log -1 --oneline origin/master 2>/dev/null || git log -1 --oneline)"
-git pull
+git pull --ff-only
 
+echo "Deployed: $(git log -1 --oneline)"
 echo ""
 echo "Starting containers..."
 docker compose up -d

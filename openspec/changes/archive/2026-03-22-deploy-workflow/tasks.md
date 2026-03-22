@@ -17,4 +17,4 @@
 ## 4. Verify
 
 - [x] 4.1 Confirm SSH alias `cartman` resolves on the laptop (or update `bin/deploy.sh` with correct host)
-- [ ] 4.2 Run `make deploy` end-to-end and confirm containers come up cleanly
+- [x] 4.2 Run `make deploy` end-to-end and confirm containers come up cleanly
