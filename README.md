@@ -26,6 +26,16 @@ cp .env.example .env
 docker compose up -d
 ```
 
+## Deploy (from laptop)
+
+```bash
+make deploy
+```
+
+Pushes the latest committed changes to cartman and restarts affected containers. Requires SSH access to `cartman` and the repo cloned at `~/dev/htpc-download-box` on the server.
+
+> **Note:** `.env` is never touched by deploy — manage it manually on cartman.
+
 ## Environment Variables
 
 See `.env.example` for all required variables.
