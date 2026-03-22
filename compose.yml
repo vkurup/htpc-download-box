@@ -148,7 +148,7 @@ services:
 
   readarr:
     container_name: readarr
-    image: linuxserver/readarr:develop
+    image: lscr.io/linuxserver/readarr:develop
     restart: unless-stopped
     network_mode: host
     environment:
@@ -161,7 +161,7 @@ services:
 
   calibre-web:
     container_name: calibre-web
-    image: linuxserver/calibre-web:latest
+    image: lscr.io/linuxserver/calibre-web:latest
     restart: unless-stopped
     network_mode: host
     environment:
