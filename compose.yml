@@ -1,0 +1,188 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+      - VPN_SERVICE_PROVIDER=purevpn
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES="United States"
+      - UPDATER_PERIOD=${UPDATER_PERIOD}
+    ports:
+      - 8112:8112 # port for deluge web UI to be reachable from local network
+      - 8080:8080 # sabnzbd
+    volumes:
+      - ${CONFIG_ROOT}/gluetun:/gluetun
+
+  deluge:
+    container_name: deluge
+    image: lscr.io/linuxserver/deluge:latest
+    restart: unless-stopped
+    network_mode: service:gluetun # run on the gluetun network
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${MEDIA_ROOT}/torrents:/data/torrents
+      - ${CONFIG_ROOT}/deluge:/config # config files
+
+  prowlarr:
+    container_name: prowlarr
+    image: linuxserver/prowlarr:nightly
+    restart: unless-stopped
+    ports:
+      - "9696:9696"
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - UMASK=002
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${CONFIG_ROOT}/prowlarr:/config # config files
+      - ${MEDIA_ROOT}/torrents/downloads/torrent-blackhole:/downloads # FIXME place where to put .torrent files for manual download / I added as jackett had it. testing if necessary
+
+#  organizr:
+#    image: organizr/organizr
+#    container_name: organizr
+#    environment:
+#      - PUID=${PUID} # default user id, defined in .env
+#      - PGID=${PGID} # default group id, defined in .env
+#      - TZ=${TZ} # timezone, defined in .env
+#      - fpm=true #true or false | using true will provide better performance
+#      - branch=v2-master #v2-master or #v2-develop
+#    volumes:
+#      - ${CONFIG_ROOT}/organizr:/config
+#    ports:
+#      - 8001:80
+#    restart: unless-stopped
+
+  sabnzbd:
+    container_name: sabnzbd
+    image: lscr.io/linuxserver/sabnzbd:latest
+    restart: unless-stopped
+#    network_mode: host
+    network_mode: service:gluetun # run on the gluetun network
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${MEDIA_ROOT}/usenet:/data/usenet # download folder
+      - ${CONFIG_ROOT}/sabnzbd:/config # config files
+#    ports:
+#     - 8080:8080 
+
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr:latest
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${CONFIG_ROOT}/sonarr:/config # config files
+      - ${MEDIA_ROOT}:/data
+
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr:latest
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${CONFIG_ROOT}/radarr:/config # config files
+      - ${MEDIA_ROOT}:/data
+
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+      - JELLYFIN_PublishedServerUrl=http://192.168.1.20 #optional
+      - DOCKER_MODS=linuxserver/mods:jellyfin-opencl-intel
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ${CONFIG_ROOT}/jellyfin:/config
+      - ${MEDIA_ROOT}/media:/data/media
+#    ports:
+#      - 8096:8096
+#      - 8920:8920 #optional
+#      - 7359:7359/udp #optional
+#      - 1900:1900/udp #optional
+    restart: unless-stopped
+
+  bazarr:
+    container_name: bazarr
+    image: linuxserver/bazarr
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+      - UMASK_SET=022 #optional
+    volumes:
+      - ${CONFIG_ROOT}/bazarr:/config # config files
+      - ${MEDIA_ROOT}:/data
+
+  # https://www.grampsweb.org/install_setup/deployment/
+  grampsweb: &grampsweb
+    container_name: grampsweb
+    image: ghcr.io/gramps-project/grampsweb:latest
+    #user: "1000:1000"
+    restart: unless-stopped
+    environment:
+      GRAMPSWEB_TREE: "Gramps Web"  # will create a new tree if not exists
+      GRAMPSWEB_CELERY_CONFIG__broker_url: "redis://grampsweb_redis:6379/0"
+      GRAMPSWEB_CELERY_CONFIG__result_backend: "redis://grampsweb_redis:6379/0"
+      GRAMPSWEB_RATELIMIT_STORAGE_URI: redis://grampsweb_redis:6379/1
+    depends_on:
+      - grampsweb_redis
+    volumes:
+      - ${CONFIG_ROOT}/gramps/users:/app/users  # persist user database
+      - ${CONFIG_ROOT}/gramps/index:/app/indexdir  # persist search index
+      - ${CONFIG_ROOT}/gramps/thumb_cache:/app/thumbnail_cache  # persist thumbnails
+      - ${CONFIG_ROOT}/gramps/cache:/app/cache  # persist export and report caches
+      - ${CONFIG_ROOT}/gramps/secret:/app/secret  # persist flask secret
+      - ${CONFIG_ROOT}/gramps/db:/root/.gramps/grampsdb  # persist Gramps database
+      - ${MEDIA_ROOT}/gramps/media:/app/media  # persist media files
+      - ${CONFIG_ROOT}/gramps/tmp:/tmp
+    ports:
+      - 5000:5000
+
+  grampsweb_celery:
+    <<: *grampsweb  # YAML merge key copying the entire grampsweb service config
+    ports: []
+    container_name: grampsweb_celery
+    depends_on:
+      - grampsweb
+      - grampsweb_redis
+    command: celery -A gramps_webapi.celery worker --loglevel=INFO --concurrency=2
+
+  grampsweb_redis:
+    image: docker.io/library/redis:7.2.4-alpine
+    container_name: grampsweb_redis
+    restart: always
+
+
