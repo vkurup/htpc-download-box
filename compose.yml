@@ -151,8 +151,7 @@ services:
     image: ghcr.io/faustvii/readarr:latest # community fork; official readarr retired June 2025
     restart: unless-stopped
     network_mode: host
-    # Note: this image runs as nobody:nogroup (uid 65534), not PUID/PGID
-    # Config dir on host must be owned by nobody: sudo chown -R nobody:nogroup $CONFIG_ROOT/readarr
+    user: "${PUID}:${PGID}"
     environment:
       - TZ=${TZ}
     volumes:
