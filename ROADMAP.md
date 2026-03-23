@@ -46,6 +46,7 @@ Suggested tasks:
 - Configure Send-to-Kindle email (`Admin → Email settings` in Calibre-Web)
 - Verify OPDS with a reader app
 - If automated book downloading becomes a priority, evaluate alternatives (e.g. LazyLibrarian)
+- Metadata on upload: Google Books requires API key, Goodreads API is shut down. Evaluate alternatives (e.g. enable Calibre binaries + `fetch-ebook-metadata`, or a self-hosted metadata proxy)
 
 ---
 
