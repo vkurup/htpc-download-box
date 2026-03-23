@@ -76,3 +76,24 @@ Make services accessible with friendly hostnames, internally and over Tailscale.
 - [ ] Add Homepage or Homarr to compose.yml
 - [ ] Configure local DNS (router or Pi-hole) for `*.cartman` → `192.168.1.20`
 - [ ] Configure Tailscale MagicDNS or split DNS for same hostnames over Tailscale
+
+---
+
+## WS5: Backup
+
+Service configs live in `$CONFIG_ROOT` (`/mnt/storage/config`) on cartman. If the server dies without a backup, all UI configuration (indexers, download clients, quality profiles, users, etc.) is lost. Media in `$MEDIA_ROOT` has the same risk.
+
+**Strategy: periodic offsite backup of `$CONFIG_ROOT`**
+
+Config is small (MBs) and changes infrequently — easy to back up. Media is large and replaceable (re-downloadable), so backing it up is optional.
+
+**Options:**
+- **rclone to cloud** (Backblaze B2, S3, Google Drive) — good for offsite, cheap for small config dirs
+- **rsync to NAS or another machine** — good if you have local storage elsewhere
+- **`make backup` target** — rsync `$CONFIG_ROOT` from cartman to laptop on demand
+
+**Suggested tasks:**
+- [ ] Determine where `/mnt/storage` lives on cartman (internal disk? external? NAS mount?)
+- [ ] Decide on backup destination (cloud vs. local)
+- [ ] Add `bin/backup.sh` + `make backup` target (mirrors `$CONFIG_ROOT` off cartman)
+- [ ] Schedule backup via cron on cartman or as a periodic manual step
