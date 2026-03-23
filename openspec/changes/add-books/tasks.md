@@ -11,13 +11,13 @@
 
 ## 3. Deploy & Initial Setup
 
-- [ ] 3.1 Commit, push, and `make deploy`
-- [ ] 3.2 Open Calibre-Web at `http://cartman:8083`, complete setup wizard, point library at `/books`
-- [ ] 3.3 Enable OPDS in Calibre-Web admin settings (`Admin → Edit Basic Configuration → Enable OPDS catalog`)
-- [ ] 3.4 Configure Send-to-Kindle email in Calibre-Web (`Admin → Email settings`)
-- [ ] 3.5 Open Readarr at `http://cartman:8787`, add Prowlarr as indexer source
-- [ ] 3.6 Add Deluge and/or SABnzbd as download clients in Readarr
-- [ ] 3.7 Set Readarr's root folder to `/data/media/books/`
+- [x] 3.1 Commit, push, and `make deploy`
+- [x] 3.2 Open Calibre-Web at `http://cartman:8083`, complete setup wizard, point library at `/books`
+- [x] 3.3 Enable OPDS in Calibre-Web admin settings (enabled by default, confirmed at `/opds`)
+- [ ] 3.4 Configure Send-to-Kindle email in Calibre-Web (`Admin → Email settings`) — skipped, see ROADMAP
+- [x] 3.5 Open Readarr at `http://cartman:8787`, add Prowlarr via Prowlarr Apps (use 192.168.1.20:8787, not localhost)
+- [x] 3.6 Add Deluge and/or SABnzbd as download clients in Readarr
+- [x] 3.7 Set Readarr's root folder to `/data/media/books/` (chown nobody:nogroup required)
 
 ## 4. Documentation
 
@@ -26,6 +26,6 @@
 
 ## 5. Verify
 
-- [ ] 5.1 Browse Calibre-Web library in browser and confirm books are visible
-- [ ] 5.2 Connect a reader app via OPDS at `http://cartman:8083/opds` and confirm browsing works
-- [ ] 5.3 Add a book in Readarr and confirm it downloads and appears in Calibre-Web
+- [x] 5.1 Browse Calibre-Web library in browser and confirm books are visible
+- [x] 5.2 Connect a reader app via OPDS at `http://cartman:8083/opds` and confirm browsing works (tested with Librera FD on Android)
+- [x] 5.3 Readarr removed — manual upload via Calibre-Web confirmed working instead
