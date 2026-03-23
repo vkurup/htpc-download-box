@@ -93,7 +93,9 @@ Config is small (MBs) and changes infrequently — easy to back up. Media is lar
 - **`make backup` target** — rsync `$CONFIG_ROOT` from cartman to laptop on demand
 
 **Suggested tasks:**
-- [ ] Determine where `/mnt/storage` lives on cartman (internal disk? external? NAS mount?)
+- [x] Determine where `/mnt/storage` lives on cartman — local ZFS pool
+  - ZFS snapshots are available as a free first line of defense (protect against accidental deletion/corruption)
+  - Still need offsite backup for hardware failure/theft
 - [ ] Decide on backup destination (cloud vs. local)
 - [ ] Add `bin/backup.sh` + `make backup` target (mirrors `$CONFIG_ROOT` off cartman)
 - [ ] Schedule backup via cron on cartman or as a periodic manual step
