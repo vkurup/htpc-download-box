@@ -99,3 +99,20 @@ Config is small (MBs) and changes infrequently — easy to back up. Media is lar
 - [ ] Decide on backup destination (cloud vs. local)
 - [ ] Add `bin/backup.sh` + `make backup` target (mirrors `$CONFIG_ROOT` off cartman)
 - [ ] Schedule backup via cron on cartman or as a periodic manual step
+
+---
+
+## WS6: Claude Code Sandbox
+
+Run Claude Code in an isolated environment so it can't affect the host system outside of intended boundaries (filesystem, network, process access). Useful for running Claude on cartman directly or from the laptop with controlled blast radius.
+
+**Open questions:**
+- What should be sandboxed? (filesystem writes, network access, shell commands, all of the above)
+- Should the sandbox run on cartman, the laptop, or both?
+- Acceptable performance/complexity tradeoff?
+
+**Options to evaluate:**
+- **Docker container** — easy to set up, good filesystem/network isolation, Claude Code runs inside
+- **VM** (e.g. lima, multipass, UTM) — stronger isolation, more overhead
+- **bubblewrap / firejail** — lightweight Linux sandboxing, no VM overhead, Linux-only
+- **Claude Code's built-in permission system** — already provides some guardrails (tool approval, path restrictions)
