@@ -1,0 +1,71 @@
+- Media:
+    - Jellyfin:
+        href: https://jellyfin.home.kurup.net
+        description: Media server
+        icon: jellyfin.png
+        widget:
+          type: jellyfin
+          url: http://localhost:8096
+          key: "{{HOMEPAGE_VAR_JELLYFIN_API_KEY}}"
+
+- Downloads:
+    - Sonarr:
+        href: https://sonarr.home.kurup.net
+        description: TV shows
+        icon: sonarr.png
+        widget:
+          type: sonarr
+          url: http://localhost:8989
+          key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
+    - Radarr:
+        href: https://radarr.home.kurup.net
+        description: Movies
+        icon: radarr.png
+        widget:
+          type: radarr
+          url: http://localhost:7878
+          key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
+    - Prowlarr:
+        href: https://prowlarr.home.kurup.net
+        description: Indexers
+        icon: prowlarr.png
+        widget:
+          type: prowlarr
+          url: http://localhost:9696
+          key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
+    - SABnzbd:
+        href: https://sabnzbd.home.kurup.net
+        description: Usenet downloader
+        icon: sabnzbd.png
+        widget:
+          type: sabnzbd
+          url: http://localhost:8080
+          key: "{{HOMEPAGE_VAR_SABNZBD_API_KEY}}"
+    - Deluge:
+        href: https://deluge.home.kurup.net
+        description: Torrent downloader
+        icon: deluge.png
+    - Bazarr:
+        href: https://bazarr.home.kurup.net
+        description: Subtitles
+        icon: bazarr.png
+
+- Books:
+    - Calibre-Web:
+        href: https://books.home.kurup.net
+        description: Ebook library
+        icon: calibre-web.png
+
+- Family:
+    - Gramps:
+        href: http://192.168.1.20:5000
+        description: Genealogy
+
+- System:
+    - Traefik:
+        href: https://traefik.home.kurup.net
+        description: Reverse proxy
+        icon: traefik.png
+        widget:
+          type: traefik
+          url: http://localhost:8080

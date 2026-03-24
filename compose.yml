@@ -146,6 +146,30 @@ services:
       - ${CONFIG_ROOT}/bazarr:/config # config files
       - ${MEDIA_ROOT}:/data
 
+  traefik:
+    container_name: traefik
+    image: traefik:v3.3
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+    volumes:
+      - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml:ro  # version-controlled, no secrets
+      - ./config/traefik/dynamic:/etc/traefik/dynamic:ro           # version-controlled, no secrets
+      - ${CONFIG_ROOT}/traefik/acme.json:/acme.json                # TLS certs — not in repo
+
+  homepage:
+    container_name: homepage
+    image: ghcr.io/gethomepage/homepage:latest
+    restart: unless-stopped
+    network_mode: host
+    env_file:
+      - .env  # provides HOMEPAGE_VAR_* for API keys
+    volumes:
+      - ./config/homepage:/app/config  # version-controlled; API keys injected via HOMEPAGE_VAR_*
+
   calibre-web:
     container_name: calibre-web
     image: lscr.io/linuxserver/calibre-web:latest

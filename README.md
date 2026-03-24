@@ -6,18 +6,20 @@ Forked from [sebgl/htpc-download-box](https://github.com/sebgl/htpc-download-box
 
 ## Stack
 
-| Service | Port | Purpose |
-|---|---|---|
-| gluetun | — | VPN gateway (PureVPN via OpenVPN) |
-| deluge | 8112 | Torrent downloader (via VPN) |
-| sabnzbd | 8080 | Usenet downloader (via VPN) |
-| prowlarr | 9696 | Indexer manager |
-| sonarr | 8989 | TV show monitoring and downloads |
-| radarr | 7878 | Movie monitoring and downloads |
-| bazarr | 6767 | Subtitle downloader |
-| jellyfin | 8096 | Media server |
-| calibre-web | 8083 | Ebook library UI + OPDS catalog |
-| grampsweb | 5000 | Genealogy app |
+| Service | Hostname | Port | Purpose |
+|---|---|---|---|
+| traefik | traefik.home.kurup.net | 80/443 | Reverse proxy + TLS |
+| homepage | home.kurup.net | 3000 | Service dashboard |
+| jellyfin | jellyfin.home.kurup.net | 8096 | Media server |
+| sonarr | sonarr.home.kurup.net | 8989 | TV show monitoring and downloads |
+| radarr | radarr.home.kurup.net | 7878 | Movie monitoring and downloads |
+| prowlarr | prowlarr.home.kurup.net | 9696 | Indexer manager |
+| bazarr | bazarr.home.kurup.net | 6767 | Subtitle downloader |
+| deluge | deluge.home.kurup.net | 8112 | Torrent downloader (via VPN) |
+| sabnzbd | sabnzbd.home.kurup.net | 8080 | Usenet downloader (via VPN) |
+| calibre-web | books.home.kurup.net | 8083 | Ebook library UI + OPDS catalog |
+| gluetun | — | — | VPN gateway (PureVPN via OpenVPN) |
+| grampsweb | — | 5000 | Genealogy app |
 
 ## Setup
 
@@ -39,7 +41,9 @@ Pushes the latest committed changes to cartman and restarts affected containers.
 
 ## Environment Variables
 
-See `.env.example` for all required variables.
+See `.env.example` for all required variables, including:
+- `CF_DNS_API_TOKEN` — Cloudflare API token for Traefik TLS certs (create at Cloudflare → My Profile → API Tokens → Edit zone DNS, scoped to `kurup.net`)
+- `HOMEPAGE_VAR_*` — API keys for service dashboard widgets
 
 ## Ebook Library
 

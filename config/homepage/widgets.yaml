@@ -1,0 +1,10 @@
+- greeting:
+    text_size: xl
+    text: "Home"
+
+- datetime:
+    text_size: l
+    format:
+      dateStyle: long
+      timeStyle: short
+      hour12: true
