@@ -165,6 +165,8 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     restart: unless-stopped
     network_mode: host
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=home.kurup.net
     env_file:
       - .env  # provides HOMEPAGE_VAR_* for API keys
     volumes:

@@ -4,4 +4,3 @@ language: en
 theme: dark
 color: slate
 useEqualHeights: true
-allowedHosts: home.kurup.net
