@@ -32,4 +32,3 @@ providers:
 
 api:
   dashboard: true
-  insecure: true  # dashboard at traefik.home.kurup.net, internal only

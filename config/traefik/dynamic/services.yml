@@ -1,4 +1,10 @@
 http:
+  middlewares:
+    dashboard-auth:
+      basicAuth:
+        users:
+          - "vinod:$apr1$KU0F57cy$d4SjDO19nS1.i.FT7BqH31"
+
   routers:
     jellyfin:
       rule: "Host(`jellyfin.home.kurup.net`)"
@@ -71,6 +77,7 @@ http:
       rule: "Host(`traefik.home.kurup.net`)"
       entryPoints: [websecure]
       service: api@internal
+      middlewares: [dashboard-auth]
       tls:
         certResolver: cloudflare
 

@@ -29,9 +29,9 @@
 
 - [x] 4.1 Commit, push, and `make deploy`
 - [x] 4.2 Verify `https://jellyfin.home.kurup.net` loads on LAN with valid cert
-- [ ] 4.3 Verify `https://home.kurup.net` loads and all service tiles are present
+- [x] 4.3 Verify `https://home.kurup.net` loads and all service tiles are present
 - [ ] 4.4 Verify `https://jellyfin.home.kurup.net` loads over Tailscale from another device
-- [ ] 4.5 Confirm direct port access `http://192.168.1.20:8096` still works
+- [x] 4.5 Confirm direct port access `http://192.168.1.20:8096` still works
 
 ## 5. Documentation
 
