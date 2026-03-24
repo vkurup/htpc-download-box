@@ -13,8 +13,8 @@
 - [x] 2.2 Create `config/traefik/traefik.yml` — static config (entrypoints, Let's Encrypt ACME with Cloudflare provider, file provider pointing to dynamic config dir)
 - [x] 2.3 Create `config/traefik/dynamic/services.yml` with routes for all services
 - [x] 2.4 Create empty `$CONFIG_ROOT/traefik/acme.json` with `chmod 600`
-- [ ] 2.5 Deploy and verify Traefik starts cleanly (`docker logs traefik`)
-- [ ] 2.6 Confirm cert obtained for `*.home.kurup.net` (check `acme.json` or Traefik dashboard)
+- [x] 2.5 Deploy and verify Traefik starts cleanly (`docker logs traefik`)
+- [x] 2.6 Confirm cert obtained for `*.home.kurup.net` (check `acme.json` or Traefik dashboard)
 
 ## 3. Homepage
 
@@ -23,12 +23,12 @@
 - [x] 3.3 Create `config/homepage/settings.yaml`
 - [x] 3.4 Create `config/homepage/services.yaml` with tiles for all services
 - [x] 3.5 Create `config/homepage/widgets.yaml`
-- [ ] 3.6 Add API keys to `.env` on cartman (HOMEPAGE_VAR_* + CF_DNS_API_TOKEN)
+- [x] 3.6 Add API keys to `.env` on cartman (HOMEPAGE_VAR_* + CF_DNS_API_TOKEN)
 
 ## 4. Deploy & Verify
 
-- [ ] 4.1 Commit, push, and `make deploy`
-- [ ] 4.2 Verify `https://jellyfin.home.kurup.net` loads on LAN with valid cert
+- [x] 4.1 Commit, push, and `make deploy`
+- [x] 4.2 Verify `https://jellyfin.home.kurup.net` loads on LAN with valid cert
 - [ ] 4.3 Verify `https://home.kurup.net` loads and all service tiles are present
 - [ ] 4.4 Verify `https://jellyfin.home.kurup.net` loads over Tailscale from another device
 - [ ] 4.5 Confirm direct port access `http://192.168.1.20:8096` still works
