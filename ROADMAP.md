@@ -71,11 +71,21 @@ Make services accessible with friendly hostnames, internally and over Tailscale.
 - Adding NPM means only one port needs to be exposed through Tailscale (443)
 - Optional: Tailscale Funnel for external access without being on the VPN
 
+**Stack:** Traefik (reverse proxy) + Homepage (dashboard)
+**Domain:** `*.home.kurup.net` (on `kurup.net` in Cloudflare)
+**TLS:** Let's Encrypt via Cloudflare DNS challenge (no ports opened to internet)
+**DNS:** Split — Ubiquiti router overrides `*.home.kurup.net` → `192.168.1.20` for LAN; Cloudflare points to Tailscale IP for remote access
+
 **Suggested tasks:**
-- [ ] Add Nginx Proxy Manager to compose.yml
-- [ ] Add Homepage or Homarr to compose.yml
-- [ ] Configure local DNS (router or Pi-hole) for `*.cartman` → `192.168.1.20`
-- [ ] Configure Tailscale MagicDNS or split DNS for same hostnames over Tailscale
+- [ ] Add Traefik to compose.yml with Cloudflare DNS challenge and Let's Encrypt
+- [ ] Add Homepage to compose.yml with service tiles and *arr API integrations
+- [ ] Add Cloudflare API token to `.env` / `.env.example`
+- [ ] Configure Ubiquiti router: wildcard DNS `*.home.kurup.net` → `192.168.1.20`
+- [ ] Configure Cloudflare DNS: `*.home.kurup.net` → cartman Tailscale IP
+- [ ] Add Traefik labels to each service in compose.yml
+- [ ] Write Homepage config YAML for all services
+
+**Future:** Consider adding Pi-hole for network-wide ad blocking + can also serve as the local DNS resolver for split DNS (replacing the Ubiquiti manual config)
 
 ---
 
