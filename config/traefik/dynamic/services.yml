@@ -78,44 +78,44 @@ http:
     jellyfin:
       loadBalancer:
         servers:
-          - url: "http://localhost:8096"
+          - url: "http://192.168.1.20:8096"
 
     sonarr:
       loadBalancer:
         servers:
-          - url: "http://localhost:8989"
+          - url: "http://192.168.1.20:8989"
 
     radarr:
       loadBalancer:
         servers:
-          - url: "http://localhost:7878"
+          - url: "http://192.168.1.20:7878"
 
     prowlarr:
       loadBalancer:
         servers:
-          - url: "http://localhost:9696"
+          - url: "http://192.168.1.20:9696"
 
     bazarr:
       loadBalancer:
         servers:
-          - url: "http://localhost:6767"
+          - url: "http://192.168.1.20:6767"
 
     deluge:
       loadBalancer:
         servers:
-          - url: "http://localhost:8112"
+          - url: "http://192.168.1.20:8112"
 
     sabnzbd:
       loadBalancer:
         servers:
-          - url: "http://localhost:8080"
+          - url: "http://192.168.1.20:8080"
 
     calibre-web:
       loadBalancer:
         servers:
-          - url: "http://localhost:8083"
+          - url: "http://192.168.1.20:8083"
 
     homepage:
       loadBalancer:
         servers:
-          - url: "http://localhost:3000"
+          - url: "http://192.168.1.20:3000"
