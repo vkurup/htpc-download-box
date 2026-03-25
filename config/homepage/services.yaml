@@ -68,4 +68,6 @@
         icon: traefik.png
         widget:
           type: traefik
-          url: http://localhost:8080
+          url: https://traefik.home.kurup.net
+          username: "{{HOMEPAGE_VAR_TRAEFIK_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_TRAEFIK_PASSWORD}}"
