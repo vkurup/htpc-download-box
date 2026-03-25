@@ -19,7 +19,7 @@ Forked from [sebgl/htpc-download-box](https://github.com/sebgl/htpc-download-box
 | sabnzbd | sabnzbd.home.kurup.net | 8080 | Usenet downloader (via VPN) |
 | calibre-web | books.home.kurup.net | 8083 | Ebook library UI + OPDS catalog |
 | gluetun | — | — | VPN gateway (PureVPN via OpenVPN) |
-| grampsweb | — | 5000 | Genealogy app |
+| grampsweb | grampsweb.home.kurup.net | 5000 | Genealogy app |
 
 ## Setup
 

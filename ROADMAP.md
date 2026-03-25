@@ -126,3 +126,19 @@ Run Claude Code in an isolated environment so it can't affect the host system ou
 - **VM** (e.g. lima, multipass, UTM) — stronger isolation, more overhead
 - **bubblewrap / firejail** — lightweight Linux sandboxing, no VM overhead, Linux-only
 - **Claude Code's built-in permission system** — already provides some guardrails (tool approval, path restrictions)
+
+---
+
+## WS7: Automated Book Acquisition
+
+Evaluate a Readarr replacement for automated ebook downloading. Book acquisition is currently manual (upload via Calibre-Web UI).
+
+**Candidates:**
+- **[Shelfmark](https://github.com/calibrain/shelfmark)** — newer project, Calibre-aware
+- **[LazyLibrarian](https://gitlab.com/LazyLibrarian/LazyLibrarian)** — established, integrates with SABnzbd/NZB indexers and torrent clients
+
+**Suggested tasks:**
+- [ ] Evaluate Shelfmark: activity level, amd64 support, Calibre-Web integration
+- [ ] Evaluate LazyLibrarian: feature set, usenet support, last release date
+- [ ] Pick one and add to compose.yml, wiring to SABnzbd + Calibre library
+- [ ] Verify downloaded books appear in Calibre-Web automatically

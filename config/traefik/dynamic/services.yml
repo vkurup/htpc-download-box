@@ -73,6 +73,13 @@ http:
       tls:
         certResolver: cloudflare
 
+    grampsweb:
+      rule: "Host(`grampsweb.home.kurup.net`)"
+      entryPoints: [websecure]
+      service: grampsweb
+      tls:
+        certResolver: cloudflare
+
     traefik:
       rule: "Host(`traefik.home.kurup.net`)"
       entryPoints: [websecure]
@@ -126,3 +133,8 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.20:3000"
+
+    grampsweb:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.20:5000"
